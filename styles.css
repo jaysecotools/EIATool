@@ -24,7 +24,7 @@ header h1 {
 /* Main Container */
 .container {
     max-width: 900px;
-    margin: 20px auto;
+    margin: 20px auto; /* Centers the container */
     padding: 20px;
 }
 
@@ -58,6 +58,8 @@ form {
 
 form label {
     flex: 1 1 100%; /* Labels take up full width */
+    font-weight: bold;
+    color: #2a6f4b; /* Matches the green theme */
 }
 
 form input[type="text"],
@@ -70,25 +72,11 @@ form textarea {
     border: 1px solid #d0d6d3; /* Subtle grey-green border */
     border-radius: 5px;
     font-size: 14px;
+    background-color: #f9fbfa; /* Subtle off-white background */
 }
 
 form textarea {
     resize: vertical; /* Allows vertical resizing only */
-}
-
-/* Activities Section Styling */
-ul {
-    padding: 0;
-    list-style: none; /* Removes bullet points */
-}
-
-ul li {
-    margin-bottom: 10px; /* Adds space between items */
-}
-
-ul div {
-    display: flex; /* Flex layout for alignment */
-    align-items: center; /* Vertically aligns checkbox and label */
 }
 
 /* Slider Styling */
@@ -125,7 +113,7 @@ input[type="range"]::-moz-range-thumb {
 /* Recommendations Styling */
 #recommendations ul {
     padding: 0;
-    list-style: none; /* Removes bullets */
+    list-style: none; /* Removes bullet points */
     margin: 0;
 }
 
@@ -138,6 +126,21 @@ input[type="range"]::-moz-range-thumb {
 #risk-level {
     font-weight: bold;
     color: #6ba583; /* Green for low risk */
+}
+
+/* Activities Section Styling */
+ul {
+    padding: 0;
+    list-style: none; /* Removes bullet points */
+}
+
+ul li {
+    margin-bottom: 10px; /* Adds space between items */
+}
+
+ul div {
+    display: flex; /* Flex layout for alignment */
+    align-items: center; /* Vertically aligns checkbox and label */
 }
 
 /* Button Styling */
