@@ -29,118 +29,51 @@
 
                 <label for="date">Date of Assessment:</label>
                 <input type="date" id="date" required>
-
-                <label for="project-description">Project Description:</label>
-                <textarea id="project-description" rows="3" placeholder="Provide a detailed description..."></textarea>
-
-                <label for="project-purpose">Purpose of the Project:</label>
-                <textarea id="project-purpose" rows="3" placeholder="State the project's goals and objectives..."></textarea>
-
-                <label for="type-of-works">Type of Works:</label>
-                <select id="type-of-works">
-                    <option value="habitat-restoration">Habitat Restoration</option>
-                    <option value="erosion-control">Erosion Control</option>
-                    <option value="pollution-mitigation">Pollution Mitigation</option>
-                    <option value="biodiversity-conservation">Biodiversity Conservation</option>
-                    <option value="infrastructure-development">Infrastructure Development</option>
-                    <option value="pest-weed-control">Pest & Weed Control</option>
-                    <option value="other">Other</option>
-                </select>
             </form>
-        </section>
-
-        <!-- Actual Works Section -->
-        <section class="card">
-            <h2>Actual Works</h2>
-            <p>Select the specific activities being undertaken:</p>
-            <ul>
-                <li><input type="checkbox" value="Invasive Species Control"> Invasive Species Control</li>
-                <li><input type="checkbox" value="Revegetation"> Revegetation</li>
-                <li><input type="checkbox" value="Erosion Control Structures"> Erosion Control Structures</li>
-                <li><input type="checkbox" value="Waterway Restoration"> Waterway Restoration</li>
-                <li><input type="checkbox" value="Wildlife Habitat Creation"> Wildlife Habitat Creation</li>
-                <li><input type="checkbox" value="Pest Management"> Pest Management</li>
-            </ul>
-        </section>
-
-        <!-- Site Conditions Section -->
-        <section class="card">
-            <h2>Site Information</h2>
-            <label for="flora-fauna">Flora & Fauna Species:</label>
-            <textarea id="flora-fauna" rows="3" placeholder="List observed species here..."></textarea>
-
-            <label for="soil-types">Soil Types:</label>
-            <select id="soil-types">
-                <option value="sandy">Sandy</option>
-                <option value="clay">Clay</option>
-                <option value="loam">Loam</option>
-                <option value="peat">Peat</option>
-                <option value="silt">Silt</option>
-            </select>
-
-            <label for="waterways">Waterways:</label>
-            <select id="waterways">
-                <option value="river">River</option>
-                <option value="stream">Stream</option>
-                <option value="wetland">Wetland</option>
-                <option value="pond">Pond</option>
-                <option value="lake">Lake</option>
-            </select>
-
-            <label for="threatened-species">Threatened Species:</label>
-            <textarea id="threatened-species" rows="3" placeholder="List any threatened species observed..."></textarea>
-
-            <label for="connectivity">Connectivity:</label>
-            <textarea id="connectivity" rows="3" placeholder="Describe habitat connectivity or wildlife corridors..."></textarea>
-        </section>
-
-        <!-- Biosecurity Measures Section -->
-        <section class="card">
-            <h2>Biosecurity Measures</h2>
-            <label for="biosecurity-plan">Describe your biosecurity measures:</label>
-            <textarea id="biosecurity-plan" rows="4" placeholder="E.g., cleaning equipment, avoiding invasive species spread..."></textarea>
         </section>
 
         <!-- Impact Assessment Section -->
         <section class="card">
             <h2>Impact Assessment</h2>
-            <p>Adjust the sliders below to assess the level of risk. Use the notes as a guide:</p>
-            <ul>
-                <li>0–20: Minimal or negligible risk</li>
-                <li>20–40: Low risk, worth monitoring</li>
-                <li>40–60: Moderate risk requiring intervention</li>
-                <li>60–80: Significant risk that demands mitigation measures</li>
-                <li>80–100: Critical risk necessitating urgent action</li>
-            </ul>
-
+            <p>Adjust the sliders below to assess the level of risk:</p>
+            
             <div class="slider-group">
                 <label for="erosion">Erosion Impact:</label>
                 <input type="range" id="erosion" min="0" max="100" value="0">
                 <output id="erosion-value">0</output>
+                <span class="tooltip">Drag to set erosion risk level.</span>
             </div>
+
             <div class="slider-group">
                 <label for="vegetation">Vegetation Damage:</label>
                 <input type="range" id="vegetation" min="0" max="100" value="0">
                 <output id="vegetation-value">0</output>
+                <span class="tooltip">Drag to set vegetation damage level.</span>
             </div>
+
             <div class="slider-group">
                 <label for="water-quality">Water Quality Impact:</label>
                 <input type="range" id="water-quality" min="0" max="100" value="0">
                 <output id="water-quality-value">0</output>
+                <span class="tooltip">Drag to set water quality impact.</span>
             </div>
+
             <div class="slider-group">
                 <label for="habitat-disruption">Habitat Disruption:</label>
                 <input type="range" id="habitat-disruption" min="0" max="100" value="0">
                 <output id="habitat-disruption-value">0</output>
+                <span class="tooltip">Drag to set habitat disruption level.</span>
             </div>
+
             <div class="slider-group">
                 <label for="air-quality">Air Quality Impact:</label>
                 <input type="range" id="air-quality" min="0" max="100" value="0">
                 <output id="air-quality-value">0</output>
+                <span class="tooltip">Drag to set air quality impact level.</span>
             </div>
         </section>
 
-        <!-- Radar Chart and Risk Assessment -->
+        <!-- Risk Assessment Section -->
         <section class="card">
             <h2>Risk Assessment</h2>
             <p><strong>Risk Score:</strong> <span id="risk-score">0</span> (<span id="risk-level">Low Risk</span>)</p>
@@ -154,10 +87,10 @@
         </section>
 
         <!-- Generate Report -->
-<section class="card">
-    <button id="generate-report" class="button">Generate PDF Report</button>
-</section>
-        
+        <section class="card">
+            <button id="generate-report" class="button">Generate PDF Report</button>
+        </section>
+
         <!-- Disclaimer Section -->
         <section class="card disclaimer">
             <p>
@@ -167,7 +100,7 @@
 
         <!-- Footer -->
         <footer>
-            <p>Developed by Jay Rowley 2025</p>
+            <p>Developed by [Your Organization/Name]</p>
         </footer>
     </div>
     <script src="script.js"></script>
