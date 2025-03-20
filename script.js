@@ -5,6 +5,7 @@ document.querySelectorAll("input[type='range']").forEach(slider => {
         sliderValue.innerText = slider.value; // Update displayed slider value
         updateRiskScore(); // Recalculate risk score dynamically
         updateRecommendations(); // Generate recommendations dynamically
+        initializeRadarChart(); // Update radar chart dynamically
     });
 });
 
@@ -47,6 +48,33 @@ function updateRiskScore() {
         riskLevelElement.style.color = "red";
     }
 }
+
+// Dynamic Recommendations Based on Scores
+function updateRecommendations() {
+    const recommendations = [];
+    if (parseInt(document.getElementById("erosion").value) > 50) {
+        recommendations.push("Implement erosion control measures such as sediment traps.");
+    }
+    if (parseInt(document.getElementById("vegetation").value) > 50) {
+        recommendations.push("Revegetate damaged areas with native species.");
+    }
+    if (parseInt(document.getElementById("water-quality").value) > 50) {
+        recommendations.push("Minimize sediment runoff using buffer zones.");
+    }
+    if (parseInt(document.getElementById("habitat-disruption").value) > 50) {
+        recommendations.push("Preserve wildlife habitats and minimize disruptions.");
+    }
+    if (parseInt(document.getElementById("air-quality").value) > 50) {
+        recommendations.push("Reduce emissions and control dust in sensitive areas.");
+    }
+
+    // Display recommendations
+    const recommendationsContainer = document.getElementById("recommendations");
+    recommendationsContainer.innerHTML = recommendations.length
+        ? `<ul>${recommendations.map(rec => `<li>${rec}</li>`).join("")}</ul>`
+        : "No significant risks detected. Monitoring recommended.";
+}
+
 // Radar Chart Initialization
 function initializeRadarChart() {
     const ctx = document.getElementById("impact-chart").getContext("2d");
@@ -89,42 +117,10 @@ function initializeRadarChart() {
     window.radarChart = new Chart(ctx, radarChartConfig);
 }
 
-// Update the Radar Chart dynamically
-document.querySelectorAll("input[type='range']").forEach(slider => {
-    slider.addEventListener("input", () => {
-        initializeRadarChart(); // Update chart data on slider change
-    });
-});
-
 // Initialize the Radar Chart on page load
 document.addEventListener("DOMContentLoaded", () => {
     initializeRadarChart();
 });
-// Dynamic Recommendations Based on Scores
-function updateRecommendations() {
-    const recommendations = [];
-    if (parseInt(document.getElementById("erosion").value) > 50) {
-        recommendations.push("Implement erosion control measures such as sediment traps.");
-    }
-    if (parseInt(document.getElementById("vegetation").value) > 50) {
-        recommendations.push("Revegetate damaged areas with native species.");
-    }
-    if (parseInt(document.getElementById("water-quality").value) > 50) {
-        recommendations.push("Minimize sediment runoff using buffer zones.");
-    }
-    if (parseInt(document.getElementById("habitat-disruption").value) > 50) {
-        recommendations.push("Preserve wildlife habitats and minimize disruptions.");
-    }
-    if (parseInt(document.getElementById("air-quality").value) > 50) {
-        recommendations.push("Reduce emissions and control dust in sensitive areas.");
-    }
-
-    // Display recommendations
-    const recommendationsContainer = document.getElementById("recommendations");
-    recommendationsContainer.innerHTML = recommendations.length
-        ? `<ul>${recommendations.map(rec => `<li>${rec}</li>`).join("")}</ul>`
-        : "No significant risks detected. Monitoring recommended.";
-}
 
 // Generate PDF Report
 document.getElementById("generate-report").addEventListener("click", () => {
