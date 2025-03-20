@@ -129,30 +129,104 @@ document.getElementById("generate-report").addEventListener("click", () => {
     // Initialize jsPDF
     const doc = new jsPDF();
 
+    // Define Colors and Fonts
+    const headerColor = "#2a6f4b"; // Deep green for headers
+    const sectionTitleFontSize = 14;
+    const textFontSize = 12;
+    const textColor = "#333"; // Neutral dark grey
+    const margin = 10; // Margins for consistent spacing
+
     // Add Title
-    doc.setFontSize(16);
-    doc.text("Environmental Impact Assessment Report", 10, 10);
-    doc.setFontSize(12);
+    doc.setTextColor(headerColor);
+    doc.setFontSize(18);
+    doc.text("Environmental Impact Assessment Report", margin, 20);
 
-    // Add Project Details
-    doc.text(`Project Name: ${document.getElementById("project-name").value || "N/A"}`, 10, 20);
-    doc.text(`Location: ${document.getElementById("location").value || "N/A"}`, 10, 30);
-    doc.text(`Assessor Name: ${document.getElementById("assessor-name").value || "N/A"}`, 10, 40);
-    doc.text(`Date of Assessment: ${document.getElementById("date").value || "N/A"}`, 10, 50);
+    // Add a line below the title
+    doc.setDrawColor(headerColor); // Deep green line
+    doc.line(margin, 22, 200, 22);
 
-    // Add Risk Assessment
-    doc.text(`Risk Score: ${document.getElementById("risk-score").innerText}`, 10, 60);
-    doc.text(`Risk Level: ${document.getElementById("risk-level").innerText}`, 10, 70);
+    // Add Project Details Section
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Project Details", margin, 30);
 
-    // Add Recommendations
-    doc.text("Recommendations:", 10, 80);
-    const recommendations = document.getElementById("recommendations").innerText || "N/A";
-    doc.text(recommendations, 10, 90);
+    doc.setTextColor(textColor);
+    doc.setFontSize(textFontSize);
+    doc.text(`Project Name: ${document.getElementById("project-name").value || "N/A"}`, margin, 40);
+    doc.text(`Location: ${document.getElementById("location").value || "N/A"}`, margin, 46);
+    doc.text(`Assessor Name: ${document.getElementById("assessor-name").value || "N/A"}`, margin, 52);
+    doc.text(`Date of Assessment: ${document.getElementById("date").value || "N/A"}`, margin, 58);
+    doc.text(`Project Description: ${document.getElementById("project-description").value || "N/A"}`, margin, 64);
+    doc.text(`Project Purpose: ${document.getElementById("project-purpose").value || "N/A"}`, margin, 70);
 
-    // Add Radar Chart as an Image
+    // Add Site Information Section
+    let yOffset = 80;
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Site Information", margin, yOffset);
+
+    doc.setTextColor(textColor);
+    yOffset += 10;
+    doc.text(`Flora & Fauna: ${document.getElementById("flora-fauna").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Soil Types: ${document.getElementById("soil-types").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Waterways: ${document.getElementById("waterways").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Biosecurity Measures: ${document.getElementById("biosecurity-plan").value || "N/A"}`, margin, yOffset);
+
+    // Add Activities Section
+    yOffset += 12;
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Activities", margin, yOffset);
+
+    doc.setTextColor(textColor);
+    yOffset += 10;
+    const activities = [
+        "Invasive Species Control",
+        "Revegetation",
+        "Erosion Control Structures",
+        "Waterway Restoration",
+        "Wildlife Habitat Creation",
+        "Pest Management",
+    ];
+    activities.forEach((activity, index) => {
+        const isChecked = document.querySelector(`input[value="${activity}"]`).checked;
+        doc.text(`${isChecked ? "[X]" : "[ ]"} ${activity}`, margin, yOffset + index * 6);
+    });
+
+    // Add Risk Assessment Section
+    yOffset += activities.length * 6 + 12;
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Risk Assessment", margin, yOffset);
+
+    doc.setTextColor(textColor);
+    yOffset += 10;
+    doc.text(`Risk Score: ${document.getElementById("risk-score").innerText || "0"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Risk Level: ${document.getElementById("risk-level").innerText || "Low Risk"}`, margin, yOffset);
+
+    // Add Radar Chart (if it fits)
+    yOffset += 10;
     const chartCanvas = document.getElementById("impact-chart");
-    const chartImage = chartCanvas.toDataURL("image/png");
-    doc.addImage(chartImage, "PNG", 10, 100, 150, 150);
+    if (chartCanvas) {
+        const chartImage = chartCanvas.toDataURL("image/png");
+        doc.addImage(chartImage, "PNG", margin, yOffset, 180, 90); // Scaled to fit within the page
+        yOffset += 95; // Move below the chart
+    }
+
+    // Add Recommendations Section
+    yOffset += 10;
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Recommendations", margin, yOffset);
+
+    doc.setTextColor(textColor);
+    yOffset += 10;
+    const recommendations = document.getElementById("recommendations").innerText || "No recommendations available.";
+    doc.text(recommendations, margin, yOffset, { maxWidth: 180 }); // Ensures the text wraps within the page width
 
     // Save the PDF
     doc.save("EIA_Report.pdf");
