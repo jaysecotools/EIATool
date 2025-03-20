@@ -76,6 +76,21 @@ form textarea {
     resize: vertical; /* Allows vertical resizing only */
 }
 
+/* Activities Section Styling */
+ul {
+    padding: 0;
+    list-style: none; /* Removes bullet points */
+}
+
+ul li {
+    margin-bottom: 10px; /* Adds space between items */
+}
+
+ul div {
+    display: flex; /* Flex layout for alignment */
+    align-items: center; /* Vertically aligns checkbox and label */
+}
+
 /* Slider Styling */
 input[type="range"] {
     appearance: none;
