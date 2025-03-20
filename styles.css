@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f9f4; /* Soft background for a calming effect */
+    background-color: #f4f9f4;
     color: #333;
     line-height: 1.6;
 }
@@ -12,24 +12,18 @@ body {
 header {
     text-align: center;
     padding: 20px 10px;
-    background-color: #2c6e49; /* Green header for environmental theme */
+    background-color: #2c6e49;
     color: white;
 }
 
 header h1 {
     margin: 0;
-    font-size: 24px;
-}
-
-header p {
-    margin-top: 5px;
-    font-size: 14px;
 }
 
 /* Main Container */
 .container {
     max-width: 900px;
-    margin: 20px auto; /* Centers the content horizontally */
+    margin: 20px auto;
     padding: 20px;
 }
 
@@ -40,7 +34,12 @@ header p {
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .card h2 {
@@ -48,158 +47,99 @@ header p {
     color: #2c6e49;
 }
 
-/* Form Elements */
-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="date"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-textarea {
-    resize: vertical; /* Allows vertical resizing but prevents horizontal overflow */
-}
-
+/* Slider Styling */
 input[type="range"] {
-    -webkit-appearance: none; /* Removes default styles for sliders */
-    appearance: none; /* Ensures consistency across browsers */
-    width: 100%; /* Full width */
-    height: 8px; /* Thickness of the track */
-    background: #ddd; /* Slider track color */
-    border-radius: 5px; /* Rounded edges for the track */
-    outline: none; /* Removes focus outline */
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, green 0%, orange 50%, red 100%);
+    border-radius: 5px;
+    outline: none;
     margin-bottom: 5px;
 }
 
-/* Slider Thumb (the draggable part) */
 input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
     appearance: none;
-    width: 15px; /* Size of the thumb */
-    height: 15px; /* Thumb height */
-    background: #2c6e49; /* Green to match theme */
-    border-radius: 50%; /* Circular thumb */
-    cursor: pointer;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
-}
-
-/* For Firefox */
-input[type="range"]::-moz-range-thumb {
     width: 15px;
     height: 15px;
     background: #2c6e49;
-    border: none;
     border-radius: 50%;
     cursor: pointer;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Hover Effect for Thumb */
-input[type="range"]::-webkit-slider-thumb:hover,
-input[type="range"]::-moz-range-thumb:hover {
-    background: #1f4f34; /* Slightly darker green when hovered */
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #2c6e49;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Active (while dragging) */
-input[type="range"]:active::-webkit-slider-thumb,
-input[type="range"]:active::-moz-range-thumb {
-    background: #145026; /* Even darker green for active state */
+/* Tooltip Styling */
+.tooltip {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+    font-style: italic;
 }
 
-/* Recommendations Section */
-#recommendations ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none; /* Removes bullets */
+/* Risk Level Styling */
+#risk-level {
+    font-weight: bold;
 }
 
-#recommendations li {
-    margin: 5px 0;
-    color: #2c6e49; /* Consistent theme for recommendations */
-}
-
-/* Radar Chart Styling */
-canvas {
-    max-width: 100%; /* Ensures the chart is responsive */
-    margin-top: 10px;
-}
-/* Enhanced Button Styling */
+/* Button Styling */
 .button {
-    display: inline-block; /* Makes the button adjust to its content */
-    padding: 15px 30px; /* Adds space around the text */
-    background-color: #2c6e49; /* Themed green background */
-    color: white; /* White text for good contrast */
-    border: none; /* Removes default border */
-    border-radius: 50px; /* Rounded edges for a sleek look */
-    font-size: 16px; /* Slightly larger font for emphasis */
-    font-weight: bold; /* Bold text for readability */
-    text-transform: uppercase; /* Makes the text all caps */
-    text-align: center; /* Centers the text */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth hover and active effects */
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #2c6e49;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Hover Effect */
 .button:hover {
-    background-color: #1f4f34; /* Darker green when hovered */
-    transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+    background-color: #1f4f34;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Active (Pressed) Effect */
 .button:active {
-    background-color: #145026; /* Even darker green when pressed */
-    transform: translateY(2px); /* Slight inward press */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    background-color: #145026;
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Disclaimer Section */
+/* Disclaimer */
 .disclaimer {
     text-align: center;
     font-size: 12px;
-    color: #777; /* Subtle text for the disclaimer */
+    color: #777;
     margin-top: 20px;
     padding: 10px;
     border-top: 1px solid #ccc;
 }
 
-/* Footer Section */
+/* Footer */
 footer {
-    display: flex; /* Enables flexbox for alignment */
-    justify-content: center; /* Horizontally centers content */
-    align-items: center; /* Vertically centers content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    width: 100%; /* Stretches across the page */
+    width: 100%;
     padding: 20px;
-    background-color: #f8f8f8; /* Light grey background for contrast */
-    border-top: 1px solid #ccc; /* Separator */
-    color: #2c6e49; /* Green text for footer */
+    background-color: #f8f8f8;
+    color: #2c6e49;
     font-weight: bold;
-}
-
-footer p {
-    margin: 0; /* No extra spacing */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px; /* Reduced padding for small screens */
-    }
-
-    header h1 {
-        font-size: 20px; /* Scales down header size */
-    }
+    border-top: 1px solid #ccc;
 }
