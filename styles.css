@@ -134,6 +134,36 @@ canvas {
     max-width: 100%; /* Ensures the chart is responsive */
     margin-top: 10px;
 }
+/* Enhanced Button Styling */
+.button {
+    display: inline-block; /* Makes the button adjust to its content */
+    padding: 15px 30px; /* Adds space around the text */
+    background-color: #2c6e49; /* Themed green background */
+    color: white; /* White text for good contrast */
+    border: none; /* Removes default border */
+    border-radius: 50px; /* Rounded edges for a sleek look */
+    font-size: 16px; /* Slightly larger font for emphasis */
+    font-weight: bold; /* Bold text for readability */
+    text-transform: uppercase; /* Makes the text all caps */
+    text-align: center; /* Centers the text */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth hover and active effects */
+}
+
+/* Hover Effect */
+.button:hover {
+    background-color: #1f4f34; /* Darker green when hovered */
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+}
+
+/* Active (Pressed) Effect */
+.button:active {
+    background-color: #145026; /* Even darker green when pressed */
+    transform: translateY(2px); /* Slight inward press */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
 
 /* Disclaimer Section */
 .disclaimer {
