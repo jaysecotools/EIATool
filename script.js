@@ -47,7 +47,59 @@ function updateRiskScore() {
         riskLevelElement.style.color = "red";
     }
 }
+// Radar Chart Initialization
+function initializeRadarChart() {
+    const ctx = document.getElementById("impact-chart").getContext("2d");
+    const chartData = {
+        labels: ["Erosion", "Vegetation", "Water Quality", "Habitat Disruption", "Air Quality"],
+        datasets: [
+            {
+                label: "Impact Levels",
+                data: [
+                    parseInt(document.getElementById("erosion").value),
+                    parseInt(document.getElementById("vegetation").value),
+                    parseInt(document.getElementById("water-quality").value),
+                    parseInt(document.getElementById("habitat-disruption").value),
+                    parseInt(document.getElementById("air-quality").value),
+                ],
+                backgroundColor: "rgba(44, 110, 73, 0.2)",
+                borderColor: "rgba(44, 110, 73, 1)",
+                borderWidth: 2,
+            },
+        ],
+    };
+    const radarChartConfig = {
+        type: "radar",
+        data: chartData,
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                },
+            },
+        },
+    };
 
+    if (window.radarChart) {
+        window.radarChart.destroy(); // Destroy the previous chart
+    }
+    window.radarChart = new Chart(ctx, radarChartConfig);
+}
+
+// Update the Radar Chart dynamically
+document.querySelectorAll("input[type='range']").forEach(slider => {
+    slider.addEventListener("input", () => {
+        initializeRadarChart(); // Update chart data on slider change
+    });
+});
+
+// Initialize the Radar Chart on page load
+document.addEventListener("DOMContentLoaded", () => {
+    initializeRadarChart();
+});
 // Dynamic Recommendations Based on Scores
 function updateRecommendations() {
     const recommendations = [];
