@@ -125,27 +125,29 @@ document.getElementById("generate-report").addEventListener("click", () => {
     const textFontSize = 12;
     const textColor = "#333";
     const margin = 10;
-    let yOffset = 20;
+    let yOffset = 20; // Starting vertical offset
 
     const addPage = () => {
         doc.addPage();
         yOffset = margin;
     };
 
+    // Add Title
     doc.setTextColor(headerColor);
     doc.setFontSize(18);
     doc.text("Environmental Impact Assessment Report", margin, yOffset);
     yOffset += 10;
 
+    // Add a line below the title
     doc.setDrawColor(headerColor);
     doc.line(margin, yOffset, 200, yOffset);
     yOffset += 10;
 
+    // Project Details Section
     doc.setFontSize(sectionTitleFontSize);
     doc.text("Project Details", margin, yOffset);
     yOffset += 10;
 
-    if (yOffset > 270) addPage();
     doc.setFontSize(textFontSize);
     doc.setTextColor(textColor);
     doc.text(`Project Name: ${document.getElementById("project-name").value || "N/A"}`, margin, yOffset);
@@ -153,6 +155,7 @@ document.getElementById("generate-report").addEventListener("click", () => {
     doc.text(`Location: ${document.getElementById("location").value || "N/A"}`, margin, yOffset);
     yOffset += 6;
     doc.text(`Assessor Name: ${document.getElementById("assessor-name").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
 
     // Site Information Section
     if (yOffset > 270) addPage();
@@ -170,14 +173,17 @@ document.getElementById("generate-report").addEventListener("click", () => {
     doc.text(`Waterways: ${document.getElementById("waterways").value || "N/A"}`, margin, yOffset);
     yOffset += 6;
     doc.text(`Biosecurity Measures: ${document.getElementById("biosecurity-plan").value || "N/A"}`, margin, yOffset);
+    yOffset += 10;
 
     // Radar Chart Section
-    if (yOffset > 270) addPage();
+    if (yOffset > 200) addPage(); // Ensure enough space for the chart
     const chartCanvas = document.getElementById("impact-chart");
     if (chartCanvas) {
         const chartImage = chartCanvas.toDataURL("image/png");
-        doc.addImage(chartImage, "PNG", margin, yOffset, 180, 90);
-        yOffset += 95;
+        const chartWidth = 180;
+        const chartHeight = (chartCanvas.height / chartCanvas.width) * chartWidth; // Preserve aspect ratio
+        doc.addImage(chartImage, "PNG", margin, yOffset, chartWidth, chartHeight);
+        yOffset += chartHeight + 10;
     }
 
     // Recommendations Section
@@ -190,8 +196,10 @@ document.getElementById("generate-report").addEventListener("click", () => {
     doc.setTextColor(textColor);
     const recommendationsText = document.getElementById("recommendations").innerText || "No recommendations available.";
     doc.text(recommendationsText, margin, yOffset, { maxWidth: 180 });
+    yOffset += 10;
 
     // Custom PDF Name
     const pdfName = prompt("Enter the file name for your PDF:", "EIA_Report") || "EIA_Report";
     doc.save(`${pdfName}.pdf`);
 });
+
