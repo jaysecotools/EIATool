@@ -149,10 +149,30 @@ document.getElementById("generate-report").addEventListener("click", () => {
     doc.setFontSize(textFontSize);
     doc.setTextColor(textColor);
     doc.text(`Project Name: ${document.getElementById("project-name").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Location: ${document.getElementById("location").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Assessor Name: ${document.getElementById("assessor-name").value || "N/A"}`, margin, yOffset);
 
-    // Repeat this process for all sections, ensuring proper line wrapping and page breaks
+    // Site Information Section
     if (yOffset > 270) addPage();
+    doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
+    doc.text("Site Information", margin, yOffset);
+    yOffset += 10;
 
+    doc.setTextColor(textColor);
+    doc.setFontSize(textFontSize);
+    doc.text(`Flora & Fauna: ${document.getElementById("flora-fauna").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Soil Types: ${document.getElementById("soil-types").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Waterways: ${document.getElementById("waterways").value || "N/A"}`, margin, yOffset);
+    yOffset += 6;
+    doc.text(`Biosecurity Measures: ${document.getElementById("biosecurity-plan").value || "N/A"}`, margin, yOffset);
+
+    // Radar Chart Section
+    if (yOffset > 270) addPage();
     const chartCanvas = document.getElementById("impact-chart");
     if (chartCanvas) {
         const chartImage = chartCanvas.toDataURL("image/png");
@@ -160,10 +180,18 @@ document.getElementById("generate-report").addEventListener("click", () => {
         yOffset += 95;
     }
 
+    // Recommendations Section
     if (yOffset > 270) addPage();
-    doc.setFontSize(sectionTitleFontSize);
     doc.setTextColor(headerColor);
+    doc.setFontSize(sectionTitleFontSize);
     doc.text("Recommendations", margin, yOffset);
+    yOffset += 10;
 
-    doc.save("EIA_Report.pdf");
+    doc.setTextColor(textColor);
+    const recommendationsText = document.getElementById("recommendations").innerText || "No recommendations available.";
+    doc.text(recommendationsText, margin, yOffset, { maxWidth: 180 });
+
+    // Custom PDF Name
+    const pdfName = prompt("Enter the file name for your PDF:", "EIA_Report") || "EIA_Report";
+    doc.save(`${pdfName}.pdf`);
 });
