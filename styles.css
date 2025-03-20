@@ -47,6 +47,44 @@ header h1 {
     color: #2c6e49;
 }
 
+/* Input Fields Alignment */
+form {
+    display: flex;
+    flex-wrap: wrap; /* Allows fields to wrap for smaller screens */
+    gap: 20px; /* Adds space between fields */
+}
+
+form label {
+    flex: 1 1 100%; /* Ensures labels occupy full width */
+}
+
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea {
+    flex: 1 1 calc(50% - 20px); /* Aligns two fields per row */
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Fixes textarea width to match other inputs */
+form textarea {
+    resize: vertical; /* Vertical resizing only */
+}
+
+/* Adjust for Small Screens */
+@media (max-width: 768px) {
+    form input[type="text"],
+    form input[type="date"],
+    form select,
+    form textarea {
+        flex: 1 1 100%; /* Single column layout for small screens */
+    }
+}
+
 /* Slider Styling */
 input[type="range"] {
     appearance: none;
